@@ -1,0 +1,24 @@
+::selection{ background-color: #E13300; color: white; }
+
+* {
+    background-color:FFFFB7;
+}
+
+a {
+    color: #003399;
+    background-color: transparent;
+    font-weight: normal;
+}
+
+h1 {
+    font-family:"Lucida Console",Arial;
+    background:#FF5E00;
+    border-radius:8px;
+    margin-left:50px;
+    padding:8px;
+    display:inline;
+}
+
+pre {
+     font-family:Arial;
+}

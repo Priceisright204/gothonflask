@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h1> {{ room.name }} </h1>
+
+<pre>
+{{ room.description }}
+</pre>
+
+    {% if room.name == "death" %}
+    <p><a href="/">Play Again?</a></p>
+    {% else %}
+    <p>
+    <form action="/game" method="get">
+        <label for="action">Please enter your command:</label>
+        <input type="text" name="action" /><br />
+        <input type="submit" />
+    </form>
+    </p>
+    {% endif %}
+    
+{% endblock %}
+
+
+
+            <div id="content">
+                <form method="get" action="{{ url_for('form') }}">
+                </form>
+            </div>
