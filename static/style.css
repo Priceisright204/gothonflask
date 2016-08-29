@@ -1,8 +1,59 @@
 ::selection{ background-color: #E13300; color: white; }
 
-* {
-    background-color:FFFFB7;
+body {
+    background-color:#C6E2FF;
+	border: 2px solid #000000;
 }
+
+.red {
+    width:50px;
+    height:290px;
+    background-color:red; 
+	float:left;
+    border-radius:5px;
+    margin:5px;
+    margin-top:40px;
+    border:1px solid #000000;
+}
+
+
+/* GETTING the search bar and the "submit" button side by side: Create a div around the input box and the search button to wrap the two elements. Give this div a width, say 200px. Then, give the input box a left float and width of 50% and the same to the submit button. Voila, they'll sit side by side as long as there's 200px of space for the wrapper to sit in.  */
+
+.container {
+    width:180px;
+    margin-left:70px;
+}
+.command input[type="text"]{
+            width: 130px; height: 25px;
+            border: 1px solid #cccccc; 
+            font-size: 15;
+            margin: 0px -3px 0px 0px;
+            vertical-align:bottom;
+            display:inline-block;
+            float:left;
+}
+
+.command input[type="submit"]{
+            background-color: white;
+            color: black;
+            width: 45px;
+            height: 26px;
+            padding: 0px;
+            border: 1px solid #cccccc; 
+            font-size: 12;
+            margin: -17px 0px 0px 2px;
+            border-radius: 0px;
+            display:inline-block;
+            float:right
+}
+
+/*
+.command input[type="text"], input[type="text"] {display:inline-block;}
+ .command input[type="submit"], input[type="text"] {
+    line-height:normal !important;
+    display:inline-block;
+    } 
+*/
 
 a {
     color: #003399;
@@ -14,11 +65,14 @@ h1 {
     font-family:"Lucida Console",Arial;
     background:#FF5E00;
     border-radius:8px;
+    border:1px solid #000000;
     margin-left:50px;
     padding:8px;
     display:inline;
+
 }
 
 pre {
-     font-family:Arial;
+    font-family:Arial;
+
 }

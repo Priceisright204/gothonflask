@@ -10,20 +10,18 @@
     {% if room.name == "death" %}
     <p><a href="/">Play Again?</a></p>
     {% else %}
-    <p>
-    <form action="/game" method="get">
-        <label for="action">Please enter your command:</label>
-        <input type="text" name="action" /><br />
+    <div class="container">
+    <form class="command" action="/game" method="get">
+      <!--  <label for="action">Please enter your command:</label> -->
+        <input type="text" placeholder="--Your Command--" name="action"/><br />
         <input type="submit" />
     </form>
-    </p>
+    </div>
+    <pre></pre> <!--creates space below the text-->
     {% endif %}
     
+    {% if room.message %}
+        <p style="color:red"><strong> {{ room.message }} </strong></p>
+    {% endif %}
+
 {% endblock %}
-
-
-
-            <div id="content">
-                <form method="get" action="{{ url_for('form') }}">
-                </form>
-            </div>

@@ -1,19 +1,30 @@
+import random
+
 class Room(object):
 
     def __init__(self, name, description):
         self.name = name
         self.description = description
         self.paths = {}
-
+        self.message = None
+        self.status = None
+        self.other_vars = {}
     def go(self, direction):
         return self.paths.get(direction, None)
 
     def add_paths(self, paths):
         self.paths.update(paths)
     
-    
-        
+    def add_message(self, message):
+        self.message = message
 
+    def add_status(self, status, other_vars = None):
+        self.status = status
+        self.other_vars.update(other_vars)
+
+    def update_vars(key, var):
+        self.other_vars.update({key : var})
+        
 central_corridor = Room("Central Corridor",
 """
 The Gothons of Planet Percal #25 have invaded your ship and destroyed
@@ -43,9 +54,12 @@ for more Gothons that might be hiding.  It's dead quiet, too quiet.
 You stand up and run to the far side of the room and find the
 neutron bomb in its container.  There's a keypad lock on the box
 and you need the code to get the bomb out.  If you get the code
-wrong 10 times then the lock closes forever and you can't
+wrong 12 times then the lock closes forever and you can't
 get the bomb.  The code is 3 digits.
 """)
+laser_weapon_armory.add_status("armory(action)", { "code": "%d%d%d" 
+                                          % (random.randint(1,9), random.randint(1,9), random.randint(1,9)) }
+                              )
 
 
 the_bridge = Room("The Bridge",
@@ -79,14 +93,14 @@ the escape pod before the whole ship explodes.  It seems like
 hardly any Gothons are on the ship, so your run is clear of
 interference.  You get to the chamber with the escape pods, and
 now need to pick one to take.  Some of them could be damaged
-but you don't have time to look.  There's 5 pods, which one
+but you don't have time to look.  There are 2 pods, which one
 do you take?
 """)
 
 
 the_end_winner = Room("The End",
 """
-You jump into pod 2 and hit the eject button.
+You jump into a pod and hit the eject button.
 The pod easily slides out into space heading to
 the planet below.  As it flies to the planet, you look
 back and see your ship implode then explode like a
@@ -103,28 +117,44 @@ implodes as the hull ruptures, crushing your body
 into jam jelly.
 """)
 
-escape_pod.add_paths({
-    '2': the_end_winner,
-    '*': the_end_loser
+generic_death = Room("death", "You died.")
+quips = [
+        "You died.  You kinda suck at this.",
+         "Your mom would be proud...if she were smarter.",
+         "Such a luser.",
+         "I have a small puppy that's better at this."
+]
+
+generic_death.add_message(quips[random.randint(0, len(quips)-1)])
+the_end_loser.add_message(quips[random.randint(0, len(quips)-1)])
+
+central_corridor.add_paths({
+    'shoot': generic_death,
+    'dodge': generic_death,
+    'tell a joke': laser_weapon_armory
 })
 
-generic_death = Room("death", "You died.")
+laser_weapon_armory.add_paths({
+    '13579': the_bridge,
+    '*': generic_death
+})
 
 the_bridge.add_paths({
     'throw the bomb': generic_death,
     'slowly place the bomb': escape_pod
 })
 
-laser_weapon_armory.add_paths({
-    '0132': the_bridge,
-    '*': generic_death
+num1 = random.randint(1,2)
+if num1 == 1:
+    num2 = 2
+else:
+    num2 = 1
+    
+escape_pod.add_paths({
+    str(num1): the_end_winner,
+    str(num2): the_end_loser
 })
 
-central_corridor.add_paths({
-    'shoot!': generic_death,
-    'dodge!': generic_death,
-    'tell a joke': laser_weapon_armory
-})
 
 START = central_corridor
 
